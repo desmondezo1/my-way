@@ -1,7 +1,8 @@
-# Advanced Sample Hardhat Project
+# MyWay App
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+This is a peer to peer decentralised logistics application, that uses the harmony one blockchain, to ensure business owner can securely send goods, from one point in nigeria to the order with the help of commuters.
 
+# How to setup 
 The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
 
 Try running some of the following tasks:
