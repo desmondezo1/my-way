@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: white;
+}
+
+header {
+  @apply flex md:flex-row flex-col justify-between;
+}
+
+header {
+  @apply font-bold;
+}
+
+header > h1 {
+  @apply text-main text-3xl;
+}
+
+header p {
+  @apply text-sm;
+}
+
+header button {
+  @apply bg-main p-3 rounded-md
+  text-white;
+}
+
+select {
+  @apply bg-main py-3 px-4;
+}
