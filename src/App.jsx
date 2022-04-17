@@ -12,8 +12,8 @@ import { logisticsDestinations } from './utils/logistics';
 function App() {
   const formik = useFormik({
     initialValues: {
-      // destinationFrom: '',
-      // destinationTo: '',
+      destinationFrom: '',
+      destinationTo: '',
       senderBusinessName: '',
       senderFirstname: '',
       senderLastname: '',

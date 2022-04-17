@@ -5,7 +5,8 @@ export default function Dropdown({
   items,
   ariaLabel = 'select dropdown',
   firstOption = '',
-  getFieldProps
+  getFieldProps,
+  onChange
 }) {
   return (
     <select
@@ -27,5 +28,6 @@ Dropdown.propTypes = {
   items: PropTypes.array,
   ariaLabel: PropTypes.string,
   firstOption: PropTypes.string,
-  getFieldProps: PropTypes.any
+  getFieldProps: PropTypes.any,
+  onChange: PropTypes.func
 };
