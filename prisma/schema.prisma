@@ -31,9 +31,9 @@ model Users{
   email             String 
   phone             BigInt 
   user_type         String 
-  nin               String 
-  bvn               String 
-  wallet            Wallets?
+  nin               String? 
+  bvn               String? 
+  wallet            Wallets?    
 }
 
 model User_types{
@@ -43,8 +43,8 @@ model User_types{
 model Wallets{
   id          Int       @id @default(autoincrement())
   address     String    @unique
-  user        Users     @relation(fields: [user_id],references: [id])
-  user_id     String
+  user        Users?     @relation(fields: [user_id],references: [id])
+  user_id     String?
 }
 
 model Companies{
@@ -61,7 +61,7 @@ model Offers{
   wallet_id   Int
   from        String
   to          String
-  item_qty    BigInt
+  item_qty    Int
   price       Int
   created     DateTime  @default(now())
   updated     DateTime  @updatedAt
