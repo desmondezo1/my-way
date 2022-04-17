@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 export default function FormTextInput({
   text,
   type = 'text',
-  value = '',
-  extraProps = {}
+  extraProps = {},
+  getFieldProps,
+  errorMsg,
+  touched
 }) {
   return (
     <div className="form-group">
       <span>{text}</span>
-      <input type={type} value={value} {...extraProps} />
+      <input type={type} {...extraProps} {...getFieldProps} />
+      {touched && <small className="error">{errorMsg}</small>}
     </div>
   );
 }
@@ -17,6 +20,9 @@ export default function FormTextInput({
 FormTextInput.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.string,
-  extraProps: PropTypes.object
+  onChange: PropTypes.func,
+  extraProps: PropTypes.object,
+  errorMsg: PropTypes.string,
+  touched: PropTypes.bool,
+  getFieldProps: PropTypes.any
 };
