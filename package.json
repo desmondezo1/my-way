@@ -29,5 +29,11 @@
     "hardhat": "^2.9.3",
     "hardhat-gas-reporter": "^1.0.8",
     "solidity-coverage": "^0.7.20"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "mocha": "^9.2.2"
   }
 }
