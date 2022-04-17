@@ -91,3 +91,14 @@ model Deliveries{
   to                  String
 
 }
+
+model commuters{
+  id              Int     @id @default(autoincrement())
+  user_id         String 
+  from            String?
+  to              String?
+  departure_time  DateTime?
+  park_address    String?
+  status          String?
+  created         DateTime  @default(now())
+}

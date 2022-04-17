@@ -123,3 +123,61 @@ app.post('/create-order', async (req, res) =>{
 
 
 })
+
+app.post('/create-commuter', async (req,res)=>{
+
+    const {
+        parkLocation,
+        depatureTime,
+        phoneNumber,
+        email,
+        firstname,
+        lastname,
+        nin,
+        bvn,
+        from,
+        to
+    } = req.body;
+
+
+    const commuter = await prisma.users.create({
+        data: {
+            first_name : firstname,
+            last_name: lastname,
+            email: email,
+            phone: phoneNumber,
+            user_type: "COMMUTER",
+            nin: "null",
+            bvn : "null",
+            // wallet: 1,
+        }
+    }).then(async user => {
+        await prisma.commuters.create({
+        data: {
+            user_id: user.id,
+            from: from,
+            to: to,
+            departure_time : depatureTime,
+            park_address: parkLocation,
+            status: "Not-delivered",
+            // wallet: 1,
+            }
+        })
+    })
+
+     
+    res.json(commuter)
+})
+
+app.get('/get-available-commuters', async (req, res) => {
+    let today = new Date();
+    let newDate = today.toISOString();
+    const { from, to } = req.body;
+    const posts = await prisma.post.findMany({
+        where: { from: from, to: to , created: { gte: newDate}},
+      })
+})
+
+app.get('/ask-commuter', async (req, res) => {
+
+})
