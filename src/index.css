@@ -30,3 +30,8 @@ header button {
 select {
   @apply bg-main py-3 px-4;
 }
+
+h3 {
+  @apply font-semibold text-xl border 
+  border-b-secondary border-solid mb-3 pb-1;
+}

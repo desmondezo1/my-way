@@ -28,10 +28,12 @@
   "dependencies": {
     "@harmony-js/core": "^0.1.57",
     "dotenv": "^16.0.0",
+    "formik": "2.2.9",
     "hardhat": "^2.9.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "uuid": "8.3.2"
+    "uuid": "8.3.2",
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
