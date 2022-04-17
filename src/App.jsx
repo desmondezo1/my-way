@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from './components/Logo';
+// import Logo from './components/Logo';
 import { FormikProvider, useFormik } from 'formik';
 import './App.css';
 import arrowRight from './assets/arrow-right.svg';
@@ -7,17 +7,14 @@ import wallet from './assets/wallet.svg';
 import Dropdown from './components/Dropdown';
 import FormTextInput from './components/FormTextInput';
 import { appConnector } from "../scripts/connectors";
+import Logo from './components/Logo';
+import './css/form.css';
+import { SendPackageSchema } from './schemas';
+import { logisticsDestinations } from './utils/logistics';
 
 
 // const DAI = new ethers.Contract(DAI_ADDRESS, ERC20ABI, provider);
 // DAIBalance = await DAI.balanceOf(owner.address);
-
-const logisticsDestinations = [
-  { label: 'Abuja', value: 'abuja' },
-  { label: 'Lagos', value: 'lagos' },
-  { label: 'Rivers', value: 'rivers' },
-  { label: 'Akwa Ibom', value: 'akwa-ibom' }
-];
 
 function App() {
 
@@ -39,12 +36,8 @@ function App() {
 
   }, [])
 
-import Logo from './components/Logo';
-import './css/form.css';
-import { SendPackageSchema } from './schemas';
-import { logisticsDestinations } from './utils/logistics';
 
-function App() {
+
   const formik = useFormik({
     initialValues: {
       // destinationFrom: '',
