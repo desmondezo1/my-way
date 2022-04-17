@@ -1,9 +1,15 @@
+import React, { useEffect, useState } from "react";
 import Logo from './components/Logo';
 import './App.css';
 import Dropdown from './components/Dropdown';
 import wallet from './assets/wallet.svg';
 import arrowRight from './assets/arrow-right.svg';
 import FormTextInput from './components/FormTextInput';
+import { appConnector } from "../scripts/connectors";
+
+
+// const DAI = new ethers.Contract(DAI_ADDRESS, ERC20ABI, provider);
+// DAIBalance = await DAI.balanceOf(owner.address);
 
 const logisticsDestinations = [
   { label: 'Abuja', value: 'abuja' },
@@ -13,13 +19,33 @@ const logisticsDestinations = [
 ];
 
 function App() {
+
+
+  const [currentAccount, setCurrentAccount] = useState("");
+
+  let address;
+
+  function getWalletAddress(){
+    address = appConnector.checkForWallet();
+      if(address){
+        setCurrentAccount(address);
+      }
+    }
+
+  useEffect(() => {
+    
+    getWalletAddress();
+
+  }, [])
+
+
   return (
     <div className="App">
       <header>
         <Logo />
         <div className="connect-wallet">
           <p>Deliver a package</p>
-          <button>
+          <button onClick={appConnector.connectWallet}>
             <span className="pr-3">Connect</span>
             <span>
               <img src={wallet} alt="wallet" width={20} height={20} />
