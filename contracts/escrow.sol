@@ -50,6 +50,17 @@ contract Escrow {
 
         isPackageDelivered[_vendor][_messenger] = _isConfirmed;
 
+       // ADD THIS LOGIC TO web3.js
+       
+        if(isPackageDelivered[_vendor][_messenger]){
+            payMessenger(_vendor, _messenger);
+        }else{
+            emit feedbackLog("Sorry! Your transaction has not been verified");
+        }
+    }
+
+    function payMessenger(address _vendor, address _messenger)internal{
+
         //set conditions for payment
         if(isPackageDelivered[_vendor][_messenger]){
 
@@ -71,38 +82,11 @@ contract Escrow {
         }else{
             emit feedbackLog("Transaction not completed");
         }
-
-       /* ADD THIS LOGIC TO web3.js
-       
-        if(isPackageDelivered[_vendor][_messenger]){
-            payMessenger(_vendor, _messenger);
-        }else{
-            emit feedbackLog("Sorry! Your transaction has not been verified");
-        }*/
     }
 
-    function payMessenger(address _vendor, address messenger)internal{
-        //set conditions for payment
-
-        //how much did seller and messenger agree on?
-        uint agreedPrice = payingToMessenger[_vendor][messenger];
-
-        //remove that amount from the records
-        balances[_vendor] -= agreedPrice;
-        payingToMessenger[_vendor][messenger] -= agreedPrice;
-
-        //then try paying the messenger. If it fails, re-update the records
-        if(payable(messenger).send(agreedPrice)){
-            emit feedbackLog("messenger paid successfully");
-        }else{
-            balances[_vendor] += agreedPrice;
-            payingToMessenger[_vendor][messenger] += agreedPrice;
-            emit feedbackLog("could not pay messenger. Money returned successfully");
-        }
-    }
-
-    
     function returnMoneyToVendor(address __vendor, address _messenger) public {
+
+        //only contract owner can call this function
         require(msg.sender == contractOwner, "Only Admin can do this");
         uint amount = payingToMessenger[__vendor][_messenger];
 
