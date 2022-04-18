@@ -65,7 +65,7 @@ model Offers{
   price       Int
   created     DateTime  @default(now())
   updated     DateTime  @updatedAt
-  commuter_offer_requests commuter_offer_requests?
+  // commuter_offer_requests commuter_offer_requests?
 }
 
 
@@ -102,14 +102,14 @@ model commuters{
   park_address    String?
   status          String?
   created         DateTime  @default(now())
-  commuter_offer_requests commuter_offer_requests?
+  // commuter_offer_requests commuter_offer_requests?
 }
 
 model commuter_offer_requests{
   id              Int       @id @default(autoincrement())
-  offer           Offers    @relation(fields: [offer_id],references: [id])
+  // offer           Offers    @relation(fields: [offer_id],references: [id])
   offer_id        Int 
-  commuter        commuters   @relation(fields: [commuter_id],references: [id])     
+  // commuter        commuters   @relation(fields: [commuter_id],references: [id])     
   commuter_id     Int 
   accepted        Boolean      @default(false) 
 }

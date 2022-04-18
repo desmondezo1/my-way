@@ -29,7 +29,7 @@ app.get('/get-commuter-offers/:commuter_id', async (req, res) =>{
     const { commuter_id } = req.params
     const offers = await prisma.commuter_offer_requests.findMany({
         where:{
-            commuter_id: commuter_id
+            commuter_id: +commuter_id
         }
     });
     res.json(offers);
@@ -184,24 +184,26 @@ app.get('/get-available-commuters', async (req, res) => {
     let today = new Date();
     let newDate = today.toISOString();
     const { from, to } = req.body;
-    const posts = await prisma.post.findMany({
-        where: { from: from, to: to , created: { gte: newDate}},
+    const commuters = await prisma.commuters.findMany({
+        where: { from: from, to: to , departure_time: { gte: newDate}},
       })
+
+      res.json(commuters)
 })
 
 app.get('/ask-commuter/:commuter_id/:offer_id', async (req, res) => {
     const { commuter_id, offer_id } = req.params
     const commuter_offer = await prisma.commuter_offer_requests.create({
-        data: { offer_id,   commuter_id },
+        data: { offer_id: +offer_id,   commuter_id:+commuter_id },
       });
 
       res.json(commuter_offer);
 })
 
-app.get('/commuter-accept-offer/:commuter_id/:offer_id', async (req, res) => {
-    const { commuter_id, offer_id } = req.params
+app.get('/commuter-accept-offer/:commuter_offer_requests_id', async (req, res) => {
+    const { commuter_offer_requests_id } = req.params
     const commuter_offer = await prisma.commuter_offer_requests.update({
-        where: { commuter_id, offer_id },
+        where: { id : +commuter_offer_requests_id },
         data: { accepted: true },
       });
 
