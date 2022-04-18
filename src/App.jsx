@@ -21,6 +21,7 @@ function App() {
 
 
   const [currentAccount, setCurrentAccount] = useState("");
+  const [statesInNigeria, setSatesInNigeria] = useState([]);
 
   let address;
 
@@ -33,6 +34,11 @@ function App() {
 
   useEffect(() => {
     
+    fetch('http://localhost:4000/get-states').then(res => res.json()).then(states => {
+      console.log(states); 
+      setSatesInNigeria(states);
+    })
+
     getWalletAddress();
 
   }, [])
@@ -42,7 +48,7 @@ function App() {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [walletBalance, setWalletBalance] = useState(0);
   const formik = useFormik({
-    initialValues: {
+      initialValues: {
       destinationFrom: '',
       destinationTo: '',
       senderBusinessName: '',
@@ -59,8 +65,25 @@ function App() {
     },
     validationSchema: SendPackageSchema,
     onSubmit: async (values) => {
-      console.log({ values });
-      setShowWalletModal(true)
+      console.log(values);
+      let wallet  = await appConnector.checkForWallet()
+      if (wallet) {
+        values.wallet = wallet;
+         
+        let order = await fetch('http://localhost:4000/create-order',{method:'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(values)})
+        .then(response => response.json())
+        .then(data => {
+          console.log('order created:', data);
+        })
+
+
+      }else{
+        appConnector.connectWallet();
+      }
+     
+      // setShowWalletModal(true)
     }
   });
   const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
@@ -87,7 +110,7 @@ function App() {
             <form className="form inner-content" onSubmit={handleSubmit}>
               <div id="logistics">
                 <Dropdown
-                  items={logisticsDestinations}
+                  items={statesInNigeria}
                   ariaLabel="deliver package from"
                   firstOption="From"
                   getFieldProps={getFieldProps('destinationFrom')}
@@ -98,7 +121,7 @@ function App() {
                 </span>
 
                 <Dropdown
-                  items={logisticsDestinations}
+                  items={statesInNigeria}
                   ariaLabel="deliver package to"
                   firstOption="To"
                   getFieldProps={getFieldProps('destinationTo')}

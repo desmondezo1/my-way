@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon server.js",
-    "start-project": "concurrently --kill-others \"npm run dev\" \"npm run backend\""
+    "start-project": "concurrently --kill-others \"npm run backend\" \"npm run dev\" "
   },
   "repository": {
     "type": "git",
@@ -30,21 +30,23 @@
   "homepage": "https://github.com/desmondezo1/my-way#readme",
   "dependencies": {
     "@harmony-js/core": "^0.1.57",
+    "@nomiclabs/hardhat-etherscan": "^3.0.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@prisma/client": "^3.12.0",
+    "axios": "^0.26.1",
     "body-parser": "^1.20.0",
     "concurrently": "^7.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "formik": "2.2.9",
     "hardhat": "^2.9.3",
+    "hardhat-gas-reporter": "^1.0.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "solidity-coverage": "^0.7.20",
     "uuid": "8.3.2",
-    "yup": "0.32.11",
-    "@nomiclabs/hardhat-etherscan": "^3.0.3",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "hardhat-gas-reporter": "^1.0.8",
-    "solidity-coverage": "^0.7.20"
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",

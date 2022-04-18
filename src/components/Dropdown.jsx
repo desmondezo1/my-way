@@ -15,8 +15,8 @@ export default function Dropdown({
     >
       <option value={firstOption}>{firstOption}</option>
       {items.map((item) => (
-        <option value={item.value} key={uuidv4()}>
-          {item.label}
+        <option value={item.state} key={uuidv4()}>
+          {item.state}
         </option>
       ))}
     </select>

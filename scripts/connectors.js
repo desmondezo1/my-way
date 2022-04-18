@@ -13,7 +13,7 @@ const appConnector = {
 
             if (!ethereum) {
                 console.log("Please install metamask!");
-                return;
+                return false;
             } else {
                 console.log("We have the ethereum object", ethereum);
             }

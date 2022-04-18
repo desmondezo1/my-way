@@ -1,4 +1,6 @@
 require("dotenv").config();
+// import dotenv from 'dotenv'
+// dotenv.config();
 
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");

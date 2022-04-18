@@ -1,5 +1,6 @@
 import Prisma from '@prisma/client';
 import express from 'express'
+import cors from 'cors';
 
 
 const { PrismaClient } = Prisma;
@@ -8,6 +9,9 @@ const prisma = new PrismaClient();
 const app = express();
 const port = process.env.PORT || 4000 ;
 
+app.use(cors({
+    origin: "http://localhost:3000"
+}));
 
 app.use(express.json());
 
@@ -38,6 +42,8 @@ app.get('/get-commuter-offers/:commuter_id', async (req, res) =>{
 app.post('/create-order', async (req, res) =>{
  
     const {
+        destinationTo,
+        destinationFrom,
         senderBusinessName,
         senderFirstname,
         senderLastname,
@@ -58,7 +64,7 @@ app.post('/create-order', async (req, res) =>{
                 first_name : receiverFirstname,
                 last_name: receiverLastname,
                 email: receiverEmail,
-                phone: receiverPhoneNumber,
+                phone: +receiverPhoneNumber,
                 user_type: "RECEIVER",
                 nin: "null",
                 bvn : "null",
@@ -77,7 +83,7 @@ app.post('/create-order', async (req, res) =>{
                 first_name : senderFirstname,
                 last_name: senderLastname,
                 email: senderEmail,
-                phone: senderPhoneNumber,
+                phone: +senderPhoneNumber,
                 user_type: "COMPANY",
                 nin: "null",
                 bvn : "null",
@@ -86,7 +92,7 @@ app.post('/create-order', async (req, res) =>{
         }).then(async user => {
             const wallet = await prisma.Wallets.create({
                 data: {
-                    address: "0xE169aa6a360447Ced2aa42DDc4bb2A33A7cBf29E",
+                    address: wallet,
                     user_id: user.id
                 }
             }) 
@@ -103,7 +109,7 @@ app.post('/create-order', async (req, res) =>{
     //create company
         const company = await  prisma.companies.create({
             data: {
-                name: "Dany MAN VENTURES",
+                name: senderBusinessName,
                 state_id: "1",
                 wallet_id: "1"
             }
@@ -117,17 +123,13 @@ app.post('/create-order', async (req, res) =>{
             data: {
                 company_id : 1,
                 wallet_id : 1,
-                from : "1",
-                to: "2",
-                item_qty: 4,
-                price: 1000
+                from : destinationFrom,
+                to: destinationTo,
+                item_qty: +numberOfItems,
+                price: +fairPrice
             }
         }); 
 
-
-    
-
-    // console.log( { offer, userReceiver, company, wallet, usercomp} );
 
     res.json({offer});
 
@@ -155,7 +157,7 @@ app.post('/create-commuter', async (req,res)=>{
             first_name : firstname,
             last_name: lastname,
             email: email,
-            phone: phoneNumber,
+            phone: +phoneNumber,
             user_type: "COMMUTER",
             nin: "null",
             bvn : "null",
