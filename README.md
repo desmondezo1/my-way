@@ -50,4 +50,23 @@ this will start the React server and the node server
 REACT at port :3000
 Backend Node Port : 4000
 
+# The Smart Contract info
+
+The contract address is:
+
+```shell
+
+Testnet: 0x5fc78e3980884be71134e82955514b8f92c0fa77
+
+```
+
+See it on the explorer
+
+```shell
+
+https://explorer.pops.one/address/0x5fc78e3980884be71134e82955514b8f92c0fa77
+
+```
+
+
 
