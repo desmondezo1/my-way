@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model States{
+  id        Int       @id @default(autoincrement())
+  state     String    @db.VarChar(255) @unique
+  bus_park  Bus_parks?
+}
+
+model Bus_parks{
+  id        Int       @id  @default(autoincrement())
+  name      String    @db.VarChar(255)
+  state     States    @relation(fields: [state_id],references: [id])
+  state_id  Int
+}
+
+model Users{
+  id                String    @id @default(cuid())
+  first_name        String 
+  last_name         String 
+  email             String 
+  phone             BigInt 
+  user_type         String 
+  nin               String? 
+  bvn               String? 
+  wallet            Wallets?    
+}
+
+model User_types{
+  id          Int       @id @default(autoincrement())
+  type        String    
+}
+model Wallets{
+  id          Int       @id @default(autoincrement())
+  address     String    @unique
+  user        Users?     @relation(fields: [user_id],references: [id])
+  user_id     String?
+}
+
+model Companies{
+  id          Int        @id @default(autoincrement())
+  name        String    
+  state_id    String    
+  wallet_id   String 
+  delivery    Deliveries?   
+}
+
+model Offers{
+  id          Int       @id @default(autoincrement())
+  company_id  Int
+  wallet_id   Int
+  from        String
+  to          String
+  item_qty    Int
+  price       Int
+  created     DateTime  @default(now())
+  updated     DateTime  @updatedAt
+  // commuter_offer_requests commuter_offer_requests?
+}
+
+
+model Transactions{
+  id          Int              @id @default(autoincrement())
+  user_id     String
+  trans_id    Int
+  wallet_id   Int
+  created     DateTime         @default(now())
+  completed   DateTime?
+}
+
+model Deliveries{
+  id                  Int         @id @default(autoincrement())
+  status              String
+  company             Companies   @relation(fields: [commuter_id],references: [id])  
+  company_id          Int
+  commuter_id         Int
+  receiver_email      String
+  receiver_phone      BigInt
+  receiver_first_name String
+  receiver_last_name  String
+  from                String
+  to                  String
+
+}
+
+model commuters{
+  id              Int     @id @default(autoincrement())
+  user_id         String 
+  from            String?
+  to              String?
+  departure_time  DateTime?
+  park_address    String?
+  status          String?
+  created         DateTime  @default(now())
+  // commuter_offer_requests commuter_offer_requests?
+}
+
+model commuter_offer_requests{
+  id              Int       @id @default(autoincrement())
+  // offer           Offers    @relation(fields: [offer_id],references: [id])
+  offer_id        Int 
+  // commuter        commuters   @relation(fields: [commuter_id],references: [id])     
+  commuter_id     Int 
+  accepted        Boolean      @default(false) 
+}
