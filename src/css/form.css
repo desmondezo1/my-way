@@ -1,0 +1,38 @@
+.form button[type='submit'] {
+  @apply bg-info text-white rounded-md w-fit
+     mx-auto py-3 px-16 block mt-10;
+}
+
+.form .form-row {
+  @apply flex md:flex-row justify-between;
+}
+
+.form .form-group {
+  @apply flex flex-col pb-4 w-full space-y-1;
+}
+
+.form .form-grid {
+  @apply md:grid md:grid-cols-2 md:gap-4
+  flex flex-col;
+}
+
+.form .form-group > span {
+  @apply text-info font-medium text-base;
+}
+
+.form-group input {
+  @apply rounded-md p-3;
+}
+
+.form .title {
+  @apply text-info;
+}
+
+.form .error {
+  @apply text-red-500;
+}
+
+#logistics {
+  @apply md:block lg:space-x-52 md:space-x-40
+  flex flex-col space-y-1 mb-10;
+}

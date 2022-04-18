@@ -1,4 +1,6 @@
 require("dotenv").config();
+// import dotenv from 'dotenv'
+// dotenv.config();
 
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
@@ -33,7 +35,9 @@ module.exports = {
     },
     mainnet: {
       url: `https://api.harmony.one`,
-      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]},
+          hardhat: {
+      chainId: 1337
     },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",

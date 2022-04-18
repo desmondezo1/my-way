@@ -1,0 +1,33 @@
+.App {
+  @apply p-12;
+}
+
+.connect-wallet {
+  @apply flex flex-row space-x-4 items-baseline;
+}
+
+.connect-wallet button > *,
+.align-straight {
+  @apply inline-block align-middle;
+}
+
+.send-package__details {
+  @apply mt-20 lg:mx-44 space-y-6;
+}
+
+.send-package__details > h2 {
+  @apply font-bold text-5xl text-secondary;
+}
+
+.inner-content {
+  @apply flex flex-col;
+}
+
+.wallet-options {
+  @apply relative p-6 flex flex-col mx-auto
+  space-y-4;
+}
+
+.wallet-options button {
+  @apply text-left;
+}
