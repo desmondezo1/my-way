@@ -10,7 +10,8 @@ header {
   @apply flex md:flex-row flex-col justify-between;
 }
 
-header {
+header,
+button {
   @apply font-bold;
 }
 
@@ -32,6 +33,10 @@ select {
 }
 
 h3 {
-  @apply font-semibold text-xl border 
-  border-b-secondary border-solid mb-3 pb-1;
+  @apply font-semibold text-xl;
+}
+
+.form h3 {
+  @apply border-b-secondary border-solid mb-3 
+  border pb-1;
 }
