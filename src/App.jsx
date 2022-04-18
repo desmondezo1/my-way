@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import Logo from './components/Logo';
 import { FormikProvider, useFormik } from 'formik';
-import { useState } from 'react';
 import './App.css';
 import arrowRight from './assets/arrow-right.svg';
 import wallet from './assets/wallet.svg';
