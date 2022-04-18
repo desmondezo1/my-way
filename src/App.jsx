@@ -1,15 +1,19 @@
 import { FormikProvider, useFormik } from 'formik';
+import { useState } from 'react';
 import './App.css';
 import arrowRight from './assets/arrow-right.svg';
 import wallet from './assets/wallet.svg';
 import Dropdown from './components/Dropdown';
 import FormTextInput from './components/FormTextInput';
 import Logo from './components/Logo';
+import WalletModal from './components/WalletModal';
 import './css/form.css';
 import { SendPackageSchema } from './schemas';
 import { logisticsDestinations } from './utils/logistics';
 
 function App() {
+  const [showWalletModal, setShowWalletModal] = useState(false);
+  const [walletBalance, setWalletBalance] = useState(0);
   const formik = useFormik({
     initialValues: {
       destinationFrom: '',
@@ -29,6 +33,7 @@ function App() {
     validationSchema: SendPackageSchema,
     onSubmit: async (values) => {
       console.log({ values });
+      setShowWalletModal(true)
     }
   });
   const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
@@ -50,6 +55,7 @@ function App() {
       <main id="main">
         <div className="send-package__details">
           <h2>Send packages</h2>
+          {showWalletModal && <WalletModal showModal title="Connect Wallet" />}
           <FormikProvider value={formik}>
             <form className="form inner-content" onSubmit={handleSubmit}>
               <div id="logistics">
