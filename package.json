@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "peer to peer logistics",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,7 +29,8 @@
     "dotenv": "^16.0.0",
     "hardhat": "^2.9.3",
     "hardhat-gas-reporter": "^1.0.8",
-    "solidity-coverage": "^0.7.20"
+    "solidity-coverage": "^0.7.0",
+    "web3": "^1.7.3"
   },
   "directories": {
     "test": "test"
