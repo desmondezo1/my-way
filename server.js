@@ -146,7 +146,7 @@ app.post('/create-commuter', async (req,res)=>{
         nin,
         bvn,
         from,
-        to
+        to,
     } = req.body;
 
 
@@ -162,7 +162,7 @@ app.post('/create-commuter', async (req,res)=>{
             // wallet: 1,
         }
     }).then(async user => {
-        await prisma.commuters.create({
+        let com = await prisma.commuters.create({
         data: {
             user_id: user.id,
             from: from,
@@ -173,10 +173,11 @@ app.post('/create-commuter', async (req,res)=>{
             // wallet: 1,
             }
         })
+         res.json({com})
     })
 
      
-    res.json(commuter)
+   
 })
 
 app.get('/get-available-commuters', async (req, res) => {
