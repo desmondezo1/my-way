@@ -22,6 +22,9 @@ function App() {
 
   const [currentAccount, setCurrentAccount] = useState("");
   const [statesInNigeria, setSatesInNigeria] = useState([]);
+  const [walletConnected, setWalletState] = useState(false);
+
+ 
 
   let address;
 
@@ -29,7 +32,9 @@ function App() {
     address = appConnector.checkForWallet();
       if(address){
         setCurrentAccount(address);
+        setWalletState(true);
       }
+    
     }
 
   useEffect(() => {
@@ -41,12 +46,15 @@ function App() {
 
     getWalletAddress();
 
+    console.log({currentAccount});
+
   }, [])
 
 
 
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [walletBalance, setWalletBalance] = useState(0);
+
   const formik = useFormik({
       initialValues: {
       destinationFrom: '',
@@ -87,6 +95,14 @@ function App() {
     }
   });
   const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
+   
+  let sh ='';
+
+    if(walletConnected){
+      sh = "0xE169...";
+    }else{
+      sh = "connect";
+    }
 
   return (
     <div className="App">
@@ -95,7 +111,7 @@ function App() {
         <div className="connect-wallet">
           <p>Deliver a package</p>
           <button onClick={appConnector.connectWallet}>
-            <span className="pr-3">Connect</span>
+            <span className="pr-3">{ sh } </span>
             <span>
               <img src={wallet} alt="wallet" width={20} height={20} />
             </span>
