@@ -18,12 +18,23 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+const { HARMONY_PRIVATE_KEY } = process.env;
+
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
   solidity: "0.8.4",
   networks: {
+    testnet: {
+      url: `https://api.s0.b.hmny.io`,
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+    },
+    mainnet: {
+      url: `https://api.harmony.one`,
+      accounts: [`0x${HARMONY_PRIVATE_KEY}`]
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
       accounts:
