@@ -1,14 +1,46 @@
 import { FormikProvider, useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dropdown from '../components/Dropdown';
 import WalletModal from '../components/WalletModal';
 import { SendPackageSchema } from '../schemas';
 import { logisticsDestinations } from '../utils/logistics';
 import arrowRight from '../assets/arrow-right.svg';
 import FormTextInput from '../components/FormTextInput';
+// import './App.css';
+import { useNavigate } from "react-router-dom";
+import { appConnector } from "../../scripts/connectors"
+import Logo from '../components/Logo';
+
 
 export default function Home() {
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [statesInNigeria, setSatesInNigeria] = useState([]);
+  const [walletConnected, setWalletState] = useState(false);
+  const navigate = useNavigate();
+  let address;
+
+  function getWalletAddress(){
+    address = appConnector.checkForWallet();
+      if(address){
+        setCurrentAccount(address);
+        setWalletState(true);
+      }
+    
+    }
+
+
+  useEffect(() => {
+    
+    fetch('http://localhost:4000/get-states').then(res => res.json()).then(states => {
+      console.log(states); 
+      setSatesInNigeria(states);
+    })
+    getWalletAddress();
+    console.log({currentAccount});
+
+  }, [])
+
 
   const formik = useFormik({
     initialValues: {
@@ -29,10 +61,30 @@ export default function Home() {
     validationSchema: SendPackageSchema,
     onSubmit: async (values) => {
       console.log({ values });
+      let wallet  = await appConnector.checkForWallet()
+      if (wallet) {
+        values.wallet = wallet;
+         
+        let order = await fetch('http://localhost:4000/create-order',{method:'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(values)})
+        .then(response => response.json())
+        .then(data => {
+          console.log('order created:', data);
+          if(data){
+            navigate("/commuters");
+          }
+        })
+
+
+      }else{
+        appConnector.connectWallet();
+      }
       setShowWalletModal(true);
     }
   });
   const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
+
   return (
     <div className="send-package__details">
       <h2>Send packages</h2>
@@ -41,7 +93,7 @@ export default function Home() {
         <form className="form inner-content" onSubmit={handleSubmit}>
           <div id="logistics">
             <Dropdown
-              items={logisticsDestinations}
+              items={statesInNigeria}
               ariaLabel="deliver package from"
               firstOption="From"
               getFieldProps={getFieldProps('destinationFrom')}
@@ -52,7 +104,7 @@ export default function Home() {
             </span>
 
             <Dropdown
-              items={logisticsDestinations}
+              items={statesInNigeria}
               ariaLabel="deliver package to"
               firstOption="To"
               getFieldProps={getFieldProps('destinationTo')}

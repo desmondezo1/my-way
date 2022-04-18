@@ -4,6 +4,7 @@ import mobileWallet from '../assets/walletconnect.svg';
 import metamask from '../assets/MetaMask_Fox.svg';
 import trustWallet from '../assets/trust.svg';
 import { WALLET_WIDTH } from '../constants';
+import{appConnector} from "../../scripts/connectors"
 
 export default function WalletModal({ showModal = false, title = 'Wallet' }) {
   const [showWalletModal, setWalletShowModal] = useState(showModal);
@@ -22,7 +23,7 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                   <button onClick={handleClose}>x</button>
                 </div>
                 <div className="wallet-options">
-                  <button>
+                  <button onClick={()=>{appConnector.connectWallet; handleClose}}>
                     <img
                       src={mobileWallet}
                       alt="wallet"
@@ -32,7 +33,7 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                     />
                     <span className="align-straight">Mobile Wallet</span>
                   </button>
-                  <button>
+                  <button onClick={appConnector.connectWallet}>
                     <img
                       src={metamask}
                       alt="metamask"
@@ -41,8 +42,8 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                       className="align-straight pr-3"
                     />
                     <span className="align-straight">Metamask</span>
-                  </button>
-                  <button>
+                  </button >
+                  <button onClick={appConnector.connectWallet}>
                     <img
                       src={trustWallet}
                       alt="trust wallet"
