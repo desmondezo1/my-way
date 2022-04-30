@@ -33,6 +33,7 @@
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@prisma/client": "^3.12.0",
+    "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.26.1",
     "body-parser": "^1.20.0",
     "concurrently": "^7.1.0",
@@ -42,20 +43,18 @@
     "formik": "2.2.9",
     "hardhat": "^2.9.3",
     "hardhat-gas-reporter": "^1.0.8",
-    "solidity-coverage": "^0.7.0",
-    "web3": "^1.7.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "6.3.0",
+    "solidity-coverage": "^0.7.0",
     "uuid": "8.3.2",
+    "web3": "^1.7.3",
     "yup": "0.32.11"
   },
   "directories": {
     "test": "test"
   },
- 
   "devDependencies": {
-    "mocha": "^9.2.2",
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@types/react": "^18.0.0",
@@ -69,6 +68,7 @@
     "eslint-plugin-react": "7.29.4",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.4",
+    "mocha": "^9.2.2",
     "nodemon": "^2.0.15",
     "postcss": "8.4.12",
     "prettier": "2.6.2",

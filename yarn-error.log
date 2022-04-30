@@ -1,0 +1,107 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\desez\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add web3 @walletconnect/web3-provider
+
+PATH: 
+  C:\Users\desez\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\desez\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\desez\AppData\Local\Microsoft\WindowsApps;C:\Users\desez\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\desez\AppData\Roaming\Composer\vendor\bin;C:\Users\desez\AppData\Roaming\npm;C:\xampp-2\mysql\bin;C:\Program Files\heroku\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.14.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Users\desez\OneDrive\Documents\WEB3-projects\my-way\node_modules\esbuild-windows-64\esbuild.exe'
+
+npm manifest: 
+  {
+    "name": "my-way",
+    "version": "1.0.0",
+    "description": "peer to peer logistics",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+      "dev": "vite",
+      "preview": "vite preview",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "backend": "nodemon server.js",
+      "start-project": "concurrently --kill-others \"npm run backend\" \"npm run dev\" ",
+      "build": "concurrently --kill-others \"npm run backend\" \"vite build\" "
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/desmondezo1/my-way.git"
+    },
+    "keywords": [
+      "Logistics",
+      "peer-to-peer",
+      "web3",
+      "Harmony-one"
+    ],
+    "author": "Desmond Ezo-Ojile",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/desmondezo1/my-way/issues"
+    },
+    "homepage": "https://github.com/desmondezo1/my-way#readme",
+    "dependencies": {
+      "@harmony-js/core": "^0.1.57",
+      "@nomiclabs/hardhat-etherscan": "^3.0.3",
+      "@nomiclabs/hardhat-waffle": "^2.0.3",
+      "@prisma/client": "^3.12.0",
+      "@walletconnect/web3-provider": "^1.7.8",
+      "axios": "^0.26.1",
+      "body-parser": "^1.20.0",
+      "concurrently": "^7.1.0",
+      "cors": "^2.8.5",
+      "dotenv": "^16.0.0",
+      "express": "^4.17.3",
+      "formik": "2.2.9",
+      "hardhat": "^2.9.3",
+      "hardhat-gas-reporter": "^1.0.8",
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0",
+      "react-router-dom": "6.3.0",
+      "solidity-coverage": "^0.7.0",
+      "uuid": "8.3.2",
+      "web3": "^1.7.3",
+      "yup": "0.32.11"
+    },
+    "directories": {
+      "test": "test"
+    },
+    "devDependencies": {
+      "@nomiclabs/hardhat-ethers": "^2.0.5",
+      "@nomiclabs/hardhat-waffle": "^2.0.3",
+      "@types/react": "^18.0.0",
+      "@types/react-dom": "^18.0.0",
+      "@vitejs/plugin-react": "^1.3.0",
+      "autoprefixer": "10.4.4",
+      "chai": "^4.3.6",
+      "eslint": "8.13.0",
+      "eslint-config-prettier": "8.5.0",
+      "eslint-plugin-prettier": "4.0.0",
+      "eslint-plugin-react": "7.29.4",
+      "ethereum-waffle": "^3.4.4",
+      "ethers": "^5.6.4",
+      "mocha": "^9.2.2",
+      "nodemon": "^2.0.15",
+      "postcss": "8.4.12",
+      "prettier": "2.6.2",
+      "prisma": "^3.12.0",
+      "tailwindcss": "3.0.24",
+      "vite": "^2.9.2"
+    },
+    "prisma": {
+      "seed": "node prisma/seed.js"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

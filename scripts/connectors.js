@@ -1,9 +1,12 @@
 
 
-import { ethers } from "ethers";
+import { providers, ethers } from "ethers";
 import ERC20ABI from "../scripts/assets/erc20-abi.json";
 import dotenv from 'dotenv'
+// import WalletConnectProvider from "./../node_modules/web3";
+// dotenv.config();
 
+// const { INFURAID } = process.env;
 
 const appConnector = {
 
@@ -38,6 +41,7 @@ const appConnector = {
             const { ethereum } = window;
 
             if (!ethereum) {
+                // appConnector.connectWalletWithWalletConnect();
                 alert("You need Metamask to use this Site, Please install MetaMask ☺️, Thank you!");
                 return;
             }
@@ -62,7 +66,13 @@ const appConnector = {
                 // return wallletBalance;
                 // // return {bal};
             },
-
+    // connectWalletWithWalletConnect : async () => {
+    //     const provider = new WalletConnectProvider({
+    //         infuraId: INFURAID,
+    //       });
+    //       await provider.enable();
+    //     //   const web3Provider = new providers.Web3Provider(provider);
+    // }
 
 
 };

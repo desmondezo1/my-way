@@ -10,6 +10,8 @@ import FormTextInput from '../components/FormTextInput';
 import { useNavigate } from "react-router-dom";
 import { appConnector } from "../../scripts/connectors"
 import Logo from '../components/Logo';
+// import WalletConnectProvider from '@walletconnect/react-native-dapp';
+// import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 export default function Home() {
@@ -78,7 +80,7 @@ export default function Home() {
 
 
       }else{
-        appConnector.connectWallet();
+        // appConnector.connectWallet();
       }
       setShowWalletModal(true);
     }
