@@ -1,0 +1,128 @@
+.dropdown_white_green_outline{
+    border: 1px solid #92DD99;
+    outline: none;
+    padding: 12px 15px;
+}
+
+.dropdown_white_green_outline:focus{
+    box-shadow: none;
+    outline: none;
+}
+
+.dropdown{
+    background: #92DD99;
+    border-radius: 5px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 29px;
+    line-height: 35px;
+    color: #0E670E;
+    border: none;
+    padding: 10px;
+    min-width: 250px;
+    max-width: 340px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+
+}
+
+
+.dropdown_wrapper{
+    margin-top: 186px;
+    margin-bottom: 86px;
+    max-width: 56%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown_title{
+    margin-bottom: 49px;
+    color: #6B7A6B;
+    font-family: 'Nunito';
+    font-weight: 600;
+    font-size: 2.6em;
+}
+
+.dropdown_select_wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0;
+}
+
+.arrow{
+    display: flex;
+}
+
+.fromWrapper{
+    background:#D8F3DB;
+    color: #0E670E;
+    padding: 60px;
+    border-radius: 5px;
+    max-width: 56%;
+    margin-bottom: 194px;
+}
+
+.formInputGroup{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+}
+
+.inputLabel{
+    color: #0E670E;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 35px;
+    margin-bottom: 13px;
+}
+
+.inputItem{
+    margin-bottom: 30px;
+}
+
+.inputItem input{
+    padding: 10px;
+}
+
+.segmentTitle{
+    color: #919591;
+    font-family: cursive;
+    margin-bottom: 20px;
+}
+
+
+
+@media (max-width: 958px) {
+
+    .dropdown_title{
+        font-size: 1.8rem
+    }
+
+    .dropdown{
+        width: 100%;
+    }
+    .dropdown_wrapper{
+        align-items: center;
+        margin-top: 150px;
+    }
+
+    .dropdown_select_wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .arrow{
+        transform: rotate(90deg);
+        visibility: hidden;
+    }
+    .fromWrapper{
+        max-width: 95%;
+    }
+
+    .formInputGroup{
+        grid-template-columns: auto;
+    }
+  }
