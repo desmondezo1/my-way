@@ -1,0 +1,25 @@
+.logo{
+    color: #92DD99;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+}
+
+.link_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.link_container a{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #5F4B4B;
+}
+
