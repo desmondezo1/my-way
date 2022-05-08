@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon server.js",
-    "start-project": "concurrently --kill-others \"npm run backend\" \"npm run dev\" ",
+    "start-project": "concurrently --kill-others \"npm run backend\" \"npm run dev\" "
   },
   "repository": {
     "type": "git",
