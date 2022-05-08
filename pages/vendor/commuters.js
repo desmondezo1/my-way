@@ -1,7 +1,7 @@
-import avatar1 from '../assets/avatars/avatar1.png';
-import trip from '../assets/trip.svg';
-import time from '../assets/time.svg';
-import CommuterInfo from '../components/CommuterInfo';
+import avatar1 from '../../public/avatars/avatar1.png';
+import trip from '../../public/trip.svg';
+import time from '../../public/time.svg';
+import CommuterInfo from '../../components/commuter/commuterInfo';
 
 export default function Commuters() {
   return (
