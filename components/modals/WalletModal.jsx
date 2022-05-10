@@ -1,19 +1,29 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import {useStore} from '../../components/stateHooks/store'
 import mobileWallet from '../../public/walletconnect.svg';
 import metamask from '../../public/MetaMask_Fox.svg';
 import trustWallet from '../../public/trust.svg';
 import { WALLET_WIDTH } from '../../constants.js';
-// import{appConnector} from "../../scripts/connectors"
+import{appConnector} from "../../scripts/connectors"
 
 export default function WalletModal({ showModal = false, title = 'Wallet' }) {
-  const [showWalletModal, setWalletShowModal] = useState(showModal);
+  const [showWalletModal, setWalletShowModal] = useState(showModal);    
+  const displayModal = useStore((state) => state.setDisplayModalFalse)
+
   const handleClose = () => {
     setWalletShowModal(false);
+    displayModal();
   };
-  const connectWallet = () => {
+
+  const connectMetaMaskWallet = () => {
     appConnector.connectWallet();
   }
+
+  const connectMobileWallet = () => {
+    appConnector.connectWithWalletConnect();
+  }
+
   return (
     <>
       {showWalletModal ? (
@@ -26,7 +36,7 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                   <button onClick={handleClose}>x</button>
                 </div>
                 <div className="wallet-options">
-                  <button onClick={()=>{connectWallet}}>
+                  <button onClick={connectMobileWallet}>
                     <img
                       src={mobileWallet}
                       alt="wallet"
@@ -36,7 +46,7 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                     />
                     <span className="align-straight">Mobile Wallet</span>
                   </button>
-                  <button onClick={connectWallet}>
+                  <button onClick={connectMetaMaskWallet}>
                     <img
                       src={metamask}
                       alt="metamask"
@@ -46,7 +56,7 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                     />
                     <span className="align-straight">Metamask</span>
                   </button >
-                  <button onClick={connectWallet}>
+                  {/* <button onClick={connectWallet}>
                     <img
                       src={trustWallet}
                       alt="trust wallet"
@@ -55,7 +65,7 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                       className="align-straight pr-3"
                     />
                     <span className="align-straight"> Trust Wallet</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

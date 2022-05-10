@@ -12,3 +12,4 @@ remix-compiler.config.js
 
 #app build
 dist
+.next

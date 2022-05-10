@@ -1,10 +1,24 @@
 import wallet from '../../public/wallet.svg'
 import Logo from '../layout/Logo'
+import { useState } from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
 import buttonStyle from '../../styles/button.module.css'
 import header from '../../styles/header.module.css'
+import { appConnector } from '../../scripts/connectors' 
+import { useStore } from '../../components/stateHooks/store';
+
 export default function Header(){
+//  const [showWalletModal, setShowWalletModal] = useState(false);
+//  let cWalletState = checkWalletState();
+const displayModal = useStore((state) => state.setDisplayModalTrue)
+
+ function checkWalletState(){
+    //  setShowWalletModal(true);
+    // appUseStore.setModalState(true);
+        //  appConnector.connectWithWalletConnect();
+ }
+let cf = checkWalletState();
     return(
 <header>
     <div className={header.container}>
@@ -16,7 +30,7 @@ export default function Header(){
                 </a>
             </Link>
 
-            <button className={buttonStyle.green}>
+            <button className={buttonStyle.green} onClick={displayModal}>
                 <span className={buttonStyle.button_text}>Connect</span>
                
                 <span className={buttonStyle.icon} >

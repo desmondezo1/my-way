@@ -16,21 +16,16 @@ export default function Dropdown({
       {...getFieldProps}
       
     >
-      <option value={firstOption}>{firstOption}</option>
-      {items.map((item) => {
-       
-        <option value={item} key="">
-          {item}
-        </option>
-
-        console.log(item)
+      <option className="fs-5" value={firstOption}>{firstOption}</option>
+      {items.map((item, k) => {
+        return <option className="fs-5" value={item} key={k}>{item}</option>
       })}
     </select>
   );
 }
 
 Dropdown.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.any,
   ariaLabel: PropTypes.string,
   firstOption: PropTypes.string,
   getFieldProps: PropTypes.any

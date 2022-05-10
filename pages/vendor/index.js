@@ -8,6 +8,12 @@ import Image from 'next/image';
 import FormTextInput from '../../components/Form/FormTextInput'
 import formStyle from '../../styles/form.module.css'
 import buttonStyle from '../../styles/button.module.css'
+import { appConnector } from '../../scripts/connectors';
+import { useStore } from '../../components/stateHooks/store.js';
+
+
+// import db from '../../utils/db/index';
+import { states } from '../../utils/statesInNigeria';
 // import statesInNigeria from '../../utils/statesInNigeria.js'
 // import './App.css';
 
@@ -24,6 +30,9 @@ export default function Home() {
   const [walletConnected, setWalletState] = useState(false);
   // const navigate = useNavigate();
   let address;
+  const displayModal = useStore((state) => state.displayModal)
+  
+  
 
   // function getWalletAddress(){
   //   address = appConnector.checkForWallet();
@@ -37,10 +46,10 @@ export default function Home() {
 
   useEffect(() => {
     
-    fetch('/api/get-states').then(res => res.json()).then(states => {
-      // console.log(states); 
-      setSatesInNigeria(states);
-    })
+    // fetch('/api/get-states').then(res => res.json()).then(states => {
+    //   // console.log(states); 
+    //   setSatesInNigeria(states);
+    // })
     // getWalletAddress();
     // console.log({currentAccount});
 
@@ -66,7 +75,7 @@ export default function Home() {
     validationSchema: SendPackageSchema,
     onSubmit: async (values) => {
       console.log({ values });
-      let wallet  = await appConnector.checkForWallet()
+      let wallet  = await appConnector.connectWithWalletConnect();
       if (wallet) {
         // values.wallet = wallet;
          
@@ -85,16 +94,18 @@ export default function Home() {
       }else{
         // appConnector.connectWallet();
       }
-      setShowWalletModal(true);
+      // appUseStore.setModalState(true);
+      // const res2 = appUseStore((state) => state.setModalState(true))
+      // setShowWalletModal(true);
     }
   });
   const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
-
+  // const showModalState = appUseStore((state) => state.showModal)
   return (
     <>
     <div className="send-package__details">
    
-      {showWalletModal && <WalletModal showModal title="Connect Wallet" />}
+      {displayModal && <WalletModal showModal title="Connect Wallet" />}
       <FormikProvider value={formik}>
         <form className="form inner-content" onSubmit={handleSubmit}>
           <div className={`${"container"} ${formStyle.dropdown_wrapper}`}>
@@ -102,7 +113,7 @@ export default function Home() {
             <div className={`${"container"} ${formStyle.dropdown_select_wrapper}`} id="logistics">
             
               <Dropdown
-                items={statesInNigeria}
+                items={states}
                 ariaLabel="deliver package from"
                 firstOption="From"
                 getFieldProps={getFieldProps('destinationFrom')}
@@ -117,7 +128,7 @@ export default function Home() {
               </span>
 
               <Dropdown
-                items={statesInNigeria}
+                items={states}
                 ariaLabel="deliver package to"
                 firstOption="To"
                 getFieldProps={getFieldProps('destinationTo')}
@@ -228,3 +239,18 @@ export default function Home() {
   </>
   );
 }
+
+// export async function getStaticProps() {
+      
+  // const getStates = await fetch(process.env('APP_URL')+'/api/get-states');
+  // const theStates = await getStates.json();
+  // setSatesInNigeria(theStates);
+  // const statesRaw = await db.collection('states').get();
+  // let states = statesRaw.docs.map(entry => entry.data());
+  //     states = states.map(item => item.states);
+
+
+  // return {
+  //   // props: { states: states[0] }, // will be passed to the page component as props
+  // }
+// }

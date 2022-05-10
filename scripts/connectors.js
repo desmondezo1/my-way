@@ -2,7 +2,36 @@
 
 import { providers, ethers } from "ethers";
 import ERC20ABI from "../scripts/assets/erc20-abi.json";
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
+import WalletConnectProvider from "@walletconnect/web3-provider";
+
+// const { Harmony } = require('@harmony-js/core');
+// const {
+//     ChainID,
+//     ChainType,
+//     hexToNumber,
+//     numberToHex,
+//     fromWei,
+//     Units,
+//     Unit,
+//   } = require('@harmony-js/utils');
+//  Create WalletConnect Provider
+
+
+
+// export const walletconnect = new WalletConnectConnector({
+//     rpc: {
+//       1: NETWORK_URL,
+//       [ChainId.HARMONY_MAINNET]: 'https://api.s0.t.hmny.io/',
+//       [ChainId.HARMONY_TESTNET]: 'https://api.s0.b.hmny.io'
+//     },
+//     bridge: 'https://bridge.walletconnect.org',
+//     qrcode: true,
+//     supportedChainIds: [
+//       ChainId.HARMONY_MAINNET, // harmony
+//       ChainId.HARMONY_TESTNET // harmony testnet
+//     ]
+//   })
 // import WalletConnectProvider from "./../node_modules/web3";
 // dotenv.config();
 
@@ -55,6 +84,28 @@ const appConnector = {
         } catch (error) {
             console.log(error);
         }
+    },
+    connectWithWalletConnect : async () => {
+        try {
+            console.log('started here');
+            const provider = new WalletConnectProvider({
+                rpc: {
+                1666700000: "https://api.s0.b.hmny.io",
+                1666700001: "https://api.s1.b.hmny.io",
+                1666700002: "https://api.s2.b.hmny.io",
+                },
+            });
+            
+            await provider.enable();
+
+            //  Wrap with Web3Provider from ethers.js
+            const web3Provider = new providers.Web3Provider(provider);
+            const accounts = await web3Provider.eth.getAccounts();
+            console.log(accounts);
+        } catch (error) {
+            console.log({error})
+        }
+        
     },
 
     getWalletBalance : async (address) =>{
