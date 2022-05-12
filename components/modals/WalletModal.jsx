@@ -4,8 +4,10 @@ import {useStore} from '../../components/stateHooks/store'
 import mobileWallet from '../../public/walletconnect.svg';
 import metamask from '../../public/MetaMask_Fox.svg';
 import trustWallet from '../../public/trust.svg';
+import Image from 'next/image';
 import { WALLET_WIDTH } from '../../constants.js';
 import{appConnector} from "../../scripts/connectors"
+import { Icon } from '@iconify/react';
 
 export default function WalletModal({ showModal = false, title = 'Wallet' }) {
   const [showWalletModal, setWalletShowModal] = useState(showModal);    
@@ -28,16 +30,18 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
     <>
       {showWalletModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-full my-6 mx-auto max-w-md">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <div className="d-flex flex-column">
+            <div className="relative w-full my-6 mx-auto max-w-md rounded">
+              <div className="p-5 rounded border-0 rounded-lg shadow-lg position-relative bg-white">
                 <div className="flex justify-between p-5">
                   <h3 className="text-xl font-semibold">{title}</h3>
-                  <button onClick={handleClose}>x</button>
+                  <button className="position-absolute border-0 bg-white text-danger pl-3 pr-3 top-0 end-0 fs-2" onClick={handleClose}>
+                  <Icon icon="eva:close-fill" />
+                  </button>
                 </div>
-                <div className="wallet-options">
-                  <button onClick={connectMobileWallet}>
-                    <img
+                <div className="wallet- d-flex flex-column">
+                  <button className="d-flex shadow-sm align-items-center bg-white justify-content-around mb-4 border-0 rounded" onClick={connectMobileWallet}>
+                    <Image
                       src={mobileWallet}
                       alt="wallet"
                       width={WALLET_WIDTH}
@@ -46,8 +50,8 @@ export default function WalletModal({ showModal = false, title = 'Wallet' }) {
                     />
                     <span className="align-straight">Mobile Wallet</span>
                   </button>
-                  <button onClick={connectMetaMaskWallet}>
-                    <img
+                  <button className="d-flex shadow-sm align-items-center bg-white justify-content-around mb-4 border-0 rounded" onClick={connectMetaMaskWallet}>
+                    <Image
                       src={metamask}
                       alt="metamask"
                       width={WALLET_WIDTH}

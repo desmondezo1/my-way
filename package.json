@@ -59,6 +59,7 @@
     "test": "test"
   },
   "devDependencies": {
+    "@iconify/react": "^3.2.1",
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@types/react": "^18.0.0",
