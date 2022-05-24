@@ -38,7 +38,7 @@ let cf = checkWalletState();
                 {!walletConnected ? (
                     <span className={buttonStyle.button_text}>Connect</span>
                 ) : 
-                    ( <span className={buttonStyle.button_text}>{walletBal}</span> )
+                    ( <span className={buttonStyle.button_text}>{Math.round(walletBal * 100) / 100 }</span> )
                 }
                
                 <span className={buttonStyle.icon} >
