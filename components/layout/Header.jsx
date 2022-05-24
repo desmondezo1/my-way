@@ -36,7 +36,7 @@ let cf = checkWalletState();
 
             <button className={buttonStyle.green} onClick={displayModal}>
                 {!walletConnected ? (
-                    <span className={buttonStyle.button_text}>{JSON.stringify(walletConnected)}{walletBal} Connect</span>
+                    <span className={buttonStyle.button_text}>Connect</span>
                 ) : 
                     ( <span className={buttonStyle.button_text}>{walletBal}</span> )
                 }
