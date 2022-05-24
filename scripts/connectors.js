@@ -75,16 +75,19 @@ const appConnector = {
                 return;
             }
 
-            const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-            let bal = await appConnector.getWalletBalance( accounts[0] );
-            console.log(bal);
-            console.log("Connected", accounts[0]);
-            return accounts[0];
+            return ethereum.request({ method: "eth_requestAccounts" }).then((acc) => {
+                return acc[0];
+            }).then(res => {
+                return appConnector.getWalletBalance( res ).then(r => {
+                    return {"balance" : r, "account" : res };
+                });
+            });
 
         } catch (error) {
             console.log(error);
         }
     },
+
     connectWithWalletConnect : async () => {
         try {
             console.log('started here');
@@ -109,23 +112,27 @@ const appConnector = {
     },
 
     getWalletBalance : async (address) =>{
-                // const provider = new ethers.providers.Web3Provider(ethereum);
+                const provider = new ethers.providers.Web3Provider(ethereum);
                 // // let bal = await provider.getBalance(address);
                 // const signer = provider.getSigner();
                 // const ONE = new ethers.Contract("0x03ff0ff224f904be3118461335064bb48df47938", ERC20ABI, provider);
                 // let wallletBalance = await ONE.balanceOf(signer.address);
                 // return wallletBalance;
                 // // return {bal};
+
+                let balance = await provider.getBalance(address);
+                let etherString = ethers.utils.formatEther(balance);
+
+                // let val = await provider.getBalance(address).then((balance) => {
+                //     // balance is a BigNumber (in wei); format is as a sting (in ether)
+                //     let etherString = ethers.utils.formatEther(balance);
+                
+                //     // console.log("Balance: " + etherString);
+                //     return etherString;
+                // });
+
+                return etherString;
             },
-    // connectWalletWithWalletConnect : async () => {
-    //     const provider = new WalletConnectProvider({
-    //         infuraId: INFURAID,
-    //       });
-    //       await provider.enable();
-    //     //   const web3Provider = new providers.Web3Provider(provider);
-    // }
-
-
 };
 
 export { appConnector };

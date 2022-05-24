@@ -12,6 +12,10 @@ export default function Header(){
 //  const [showWalletModal, setShowWalletModal] = useState(false);
 //  let cWalletState = checkWalletState();
 const displayModal = useStore((state) => state.setDisplayModalTrue)
+const walletBal = useStore((state) => state.walletBalance)
+const walletConnected = useStore((state) => state.walletConnected)
+
+
 
  function checkWalletState(){
     //  setShowWalletModal(true);
@@ -31,7 +35,11 @@ let cf = checkWalletState();
             </Link>
 
             <button className={buttonStyle.green} onClick={displayModal}>
-                <span className={buttonStyle.button_text}>Connect</span>
+                {!walletConnected ? (
+                    <span className={buttonStyle.button_text}>{JSON.stringify(walletConnected)}{walletBal} Connect</span>
+                ) : 
+                    ( <span className={buttonStyle.button_text}>{walletBal}</span> )
+                }
                
                 <span className={buttonStyle.icon} >
                     <Image 

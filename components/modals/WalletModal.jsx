@@ -9,15 +9,24 @@ import{appConnector} from "../../scripts/connectors"
 
 export default function WalletModal({ showModal = false, title = 'Wallet' }) {
   const [showWalletModal, setWalletShowModal] = useState(showModal);    
-  const displayModal = useStore((state) => state.setDisplayModalFalse)
+  const [walletAcc, setWalletAcc] = useState({});    
+  const displayModal = useStore((state) => state.setDisplayModalFalse);
+  const setwalletConnected = useStore((state) => state.setWalletConnected);
+  const setWalletBalance = useStore((state) => state.setWalletBalance);
 
   const handleClose = () => {
     setWalletShowModal(false);
     displayModal();
   };
 
-  const connectMetaMaskWallet = () => {
-    appConnector.connectWallet();
+  const connectMetaMaskWallet = async () => {
+    let resp = await appConnector.connectWallet();
+    if (resp.account) {
+      console.log(resp);
+      setwalletConnected(true);
+      setWalletBalance(resp.balance);
+    }
+
   }
 
   const connectMobileWallet = () => {
